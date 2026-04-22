@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiverse Scanner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s ease;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Universe Themes */
+        .theme-earth { background: #fdfbf7; color: #333; font-family: 'Georgia', serif; }
+        .theme-cyber { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; }
+        .theme-neon { background: #2b00ff; color: #ff00ea; font-family: 'Arial Black', sans-serif; text-shadow: 2px 2px #00eaff; }
+        .theme-finale { background: #fffafa; color: #b08d57; font-family: 'Georgia', serif; }
+
+        .container {
+            max-width: 500px;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            min-height: 100px; /* Keeps button from jumping around */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: 2px solid currentColor;
+            background: transparent;
+            color: currentColor;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            outline: none;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: currentColor;
+        }
+        
+        /* Specific button hover text colors based on theme */
+        .theme-earth button:hover { color: #fdfbf7; }
+        .theme-cyber button:hover { color: #0a0a0a; }
+        .theme-neon button:hover { color: #2b00ff; }
+        .theme-finale button { background: #d4af37; color: #fff; border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+        .theme-finale button:hover { background: #b08d57; color: #fff; }
+
+    </style>
+</head>
+<body class="theme-earth" id="body-bg">
+
+    <div class="container">
+        <h1 id="universe-title">Universe Earth-001</h1>
+        <p id="universe-text">Happy 25th Birthday to the Proest of Pros. In this timeline, you are intelligent, resilient, gorgeous, and for some reason, tolerating my terrible makeup gift suggestions.</p>
+        
+        <button id="action-btn" onclick="nextUniverse()">Scan Alternate Timeline</button>
+    </div>
+
+    <script>
+        const universes = [
+            {
+                theme: "theme-earth",
+                title: "Universe Earth-001",
+                text: "Happy 25th Birthday to the Proest of Pros. In this timeline, you are intelligent, resilient, gorgeous, and for some reason, tolerating my terrible makeup gift suggestions.",
+                btn: "Scan Alternate Timeline"
+            },
+            {
+                theme: "theme-cyber",
+                title: "Universe Matrix-404",
+                text: "Scanning... Even in a reality made entirely of code and endless automation scripts, your logic is absolutely flawless. Still the smartest one in the room.",
+                btn: "Jump to Next Dimension"
+            },
+            {
+                theme: "theme-neon",
+                title: "Universe Void-88",
+                text: "In a timeline where the laws of physics are upside down and everything is chaotic, you are somehow still keeping everything perfectly together.",
+                btn: "Initiate Final Scan"
+            },
+            {
+                theme: "theme-finale",
+                title: "Scan Complete.",
+                text: "The results are in. I checked them all, and it's a scientific fact: you are simply the best woman across all the universes. Happy 25th Birthday! 🥂",
+                btn: "Claim Your Gift"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function nextUniverse() {
+            currentIndex++;
+            
+            // If they reach the end, redirect them to your PDF or WhatsApp!
+            if (currentIndex >= universes.length) {
+                alert("Redirecting to the Gift Selection Protocol...");
+                // Uncomment the line below and add your link if you want it to go somewhere!
+                // window.location.href = "YOUR_LINK_HERE";
+                currentIndex = universes.length - 1; // Keep it on the last page
+                return;
+            }
+
+            const currentData = universes[currentIndex];
+
+            // Update the DOM
+            document.getElementById('body-bg').className = currentData.theme;
+            document.getElementById('universe-title').innerText = currentData.title;
+            document.getElementById('universe-text').innerText = currentData.text;
+            document.getElementById('action-btn').innerText = currentData.btn;
+        }
+    </script>
+</body>
+</html>

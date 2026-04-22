@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiverse Scanner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: all 0.5s ease;
         }
         
         body {
@@ -18,65 +18,108 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: sans-serif;
             padding: 20px;
             text-align: center;
+            transition: background 0.8s ease, color 0.8s ease;
+            overflow: hidden;
         }
 
-        /* Universe Themes */
-        .theme-earth { background: #fdfbf7; color: #333; font-family: 'Georgia', serif; }
-        .theme-cyber { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; }
-        .theme-neon { background: #2b00ff; color: #ff00ea; font-family: 'Arial Black', sans-serif; text-shadow: 2px 2px #00eaff; }
-        .theme-finale { background: #fffafa; color: #b08d57; font-family: 'Georgia', serif; }
+        /* The Frosted Glass Container */
+        .glass-panel {
+            width: 100%; /* Ensures it fits perfectly on small mobile screens */
+            max-width: 450px; /* Prevents it from stretching out on desktop monitors */
+            padding: 40px 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
 
-        .container {
-            max-width: 500px;
-            padding: 40px 20px;
+        /* Animation for when text changes */
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
         }
 
         h1 {
             font-size: 1.8rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 40px;
-            min-height: 100px; /* Keeps button from jumping around */
+            margin-bottom: 35px;
+            min-height: 110px; /* Prevents button from jumping */
         }
 
         button {
             padding: 15px 30px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             border: 2px solid currentColor;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: currentColor;
             border-radius: 30px;
             cursor: pointer;
-            font-weight: bold;
-            outline: none;
+            font-family: inherit;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+            backdrop-filter: blur(5px);
+            width: 100%; /* Makes the button look sleek and uniform */
+            max-width: 300px;
         }
 
         button:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             background: currentColor;
         }
-        
-        /* Specific button hover text colors based on theme */
+
+        /* --- UNIVERSE THEMES --- */
+        /* Theme 1: Earth (Soft Pink/Gold) */
+        .theme-earth { background: linear-gradient(135deg, #fdfbf7, #fce4ec); color: #8a6d3b; font-family: 'Poppins', sans-serif; }
+        .theme-earth h1 { font-family: 'Playfair Display', serif; }
         .theme-earth button:hover { color: #fdfbf7; }
-        .theme-cyber button:hover { color: #0a0a0a; }
-        .theme-neon button:hover { color: #2b00ff; }
-        .theme-finale button { background: #d4af37; color: #fff; border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+
+        /* Theme 2: Cinematic (Vintage B&W) */
+        .theme-cinema { background: linear-gradient(135deg, #2b2b2b, #1a1a1a); color: #e8e8e8; font-family: 'Playfair Display', serif; font-style: italic; }
+        .theme-cinema button:hover { color: #1a1a1a; }
+
+        /* Theme 3: Cyberpunk (Neon Purple/Blue) */
+        .theme-cyber { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #00eaff; font-family: 'Courier New', monospace; border-color: #00eaff; }
+        .theme-cyber button:hover { color: #0f0c29; }
+
+        /* Theme 4: Fantasy (Ethereal Forest) */
+        .theme-fantasy { background: linear-gradient(135deg, #134e5e, #71b280); color: #ffebcd; font-family: 'Playfair Display', serif; }
+        .theme-fantasy button:hover { color: #134e5e; }
+
+        /* Theme 5: Grand Finale (Pure Gold & White) */
+        .theme-finale { background: #fffafa; color: #b08d57; font-family: 'Poppins', sans-serif; }
+        .theme-finale h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; }
+        .theme-finale .glass-panel { background: #fff; border: 2px solid #d4af37; box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15); }
+        .theme-finale button { background: #d4af37; color: #fff; border: none; }
         .theme-finale button:hover { background: #b08d57; color: #fff; }
 
     </style>
 </head>
 <body class="theme-earth" id="body-bg">
 
-    <div class="container">
-        <h1 id="universe-title">Universe Earth-001</h1>
+    <div class="glass-panel fade-in" id="content-box">
+        <span class="icon" id="universe-icon">🌍</span>
+        <h1 id="universe-title">Universe Earth-Prime</h1>
         <p id="universe-text">Happy 25th Birthday to the Proest of Pros. In this timeline, you are intelligent, resilient, gorgeous, and for some reason, tolerating my terrible makeup gift suggestions.</p>
         
         <button id="action-btn" onclick="nextUniverse()">Scan Alternate Timeline</button>
@@ -86,26 +129,37 @@
         const universes = [
             {
                 theme: "theme-earth",
-                title: "Universe Earth-001",
+                icon: "🌍",
+                title: "Universe Earth-Prime",
                 text: "Happy 25th Birthday to the Proest of Pros. In this timeline, you are intelligent, resilient, gorgeous, and for some reason, tolerating my terrible makeup gift suggestions.",
                 btn: "Scan Alternate Timeline"
             },
             {
-                theme: "theme-cyber",
-                title: "Universe Matrix-404",
-                text: "Scanning... Even in a reality made entirely of code and endless automation scripts, your logic is absolutely flawless. Still the smartest one in the room.",
+                theme: "theme-cinema",
+                icon: "🎬",
+                title: "Universe Noir-1960",
+                text: "A vintage masterpiece. In this cinematic reality, you are the untouchable leading lady with flawless style. Everyone else is just an extra.",
                 btn: "Jump to Next Dimension"
             },
             {
-                theme: "theme-neon",
-                title: "Universe Void-88",
-                text: "In a timeline where the laws of physics are upside down and everything is chaotic, you are somehow still keeping everything perfectly together.",
+                theme: "theme-cyber",
+                icon: "⚡",
+                title: "Universe System-0X",
+                text: "Scanning... In this futuristic utopia, your intelligence literally powers the city grid. You are the ultimate upgrade.",
+                btn: "Enter Fantasy Realm"
+            },
+            {
+                theme: "theme-fantasy",
+                icon: "✨",
+                title: "Universe Ethereal",
+                text: "A magical timeline where you rule effortlessly. Stress is banished by royal decree, and everything you do turns out perfectly.",
                 btn: "Initiate Final Scan"
             },
             {
                 theme: "theme-finale",
+                icon: "👑",
                 title: "Scan Complete.",
-                text: "The results are in. I checked them all, and it's a scientific fact: you are simply the best woman across all the universes. Happy 25th Birthday! 🥂",
+                text: "The data is undeniable. I checked them all, and it's a scientific fact: you are simply the best woman across all the universes. Happy 25th Birthday! 🥂",
                 btn: "Claim Your Gift"
             }
         ];
@@ -115,19 +169,24 @@
         function nextUniverse() {
             currentIndex++;
             
-            // If they reach the end, redirect them to your PDF or WhatsApp!
             if (currentIndex >= universes.length) {
-                alert("Redirecting to the Gift Selection Protocol...");
-                // Uncomment the line below and add your link if you want it to go somewhere!
-                // window.location.href = "YOUR_LINK_HERE";
-                currentIndex = universes.length - 1; // Keep it on the last page
+                // To link to your PDF, replace the URL below with your actual link!
+                window.location.href = "YOUR_LINK_HERE";
+                currentIndex = universes.length - 1; 
                 return;
             }
 
             const currentData = universes[currentIndex];
+            const contentBox = document.getElementById('content-box');
+
+            // Remove animation class to trigger reflow, then add it back for smooth fade
+            contentBox.classList.remove('fade-in');
+            void contentBox.offsetWidth; 
+            contentBox.classList.add('fade-in');
 
             // Update the DOM
             document.getElementById('body-bg').className = currentData.theme;
+            document.getElementById('universe-icon').innerText = currentData.icon;
             document.getElementById('universe-title').innerText = currentData.title;
             document.getElementById('universe-text').innerText = currentData.text;
             document.getElementById('action-btn').innerText = currentData.btn;

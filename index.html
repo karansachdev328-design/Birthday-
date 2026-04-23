@@ -16,21 +16,19 @@
             height: 100vh; /* Fallback */
             height: 100dvh; /* Dynamic height ensures it stays above the phone's bottom menu */
             display: flex;
-            flex-direction: column;
-            padding: 15px;
+            flex-direction: column; /* Stack vertically */
+            padding: 10px 15px; /* Edge breathing room */
             text-align: center;
             transition: background 0.8s ease, color 0.8s ease;
             overflow: hidden; /* No scrolling */
-            align-items: center;
-            justify-content: flex-start; /* Starts from the top instead of dead center */
         }
 
         /* The Frosted Glass Container */
         .glass-panel {
             width: 100%;
             max-width: 450px;
-            margin-top: 5vh; /* Shifts the whole box higher up the screen */
-            padding: 20px 15px; /* Slightly tighter padding to save space */
+            margin: auto; /* THIS IS THE FIX: Automatically centers short pages, but expands dynamically for long ones! */
+            padding: 20px 15px; 
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
@@ -51,24 +49,24 @@
         }
 
         .icon {
-            font-size: 2.4rem; /* Slightly reduced icon size */
+            font-size: 2.2rem; /* Slightly reduced to save space */
             margin-bottom: 5px;
             display: block;
             text-shadow: 0 2px 10px rgba(255,255,255,0.3);
         }
 
         h1 {
-            font-size: 1.6rem; 
-            margin-bottom: 8px; 
+            font-size: 1.55rem; 
+            margin-bottom: 6px; 
             letter-spacing: 1px;
             font-family: 'Playfair Display', serif;
         }
 
         p {
-            font-size: 0.95rem; /* Perfect reading size that fits long text */
-            line-height: 1.45;
-            margin-bottom: 15px; 
-            min-height: 80px; 
+            font-size: 0.95rem; 
+            line-height: 1.35; /* Tighter line height for long paragraphs */
+            margin-bottom: 12px; 
+            min-height: 60px; /* Reduced minimum height so short pages don't look artificially tall */
             font-family: 'Poppins', sans-serif;
         }
 
@@ -82,7 +80,7 @@
         }
 
         button {
-            padding: 12px 18px;
+            padding: 10px 16px; /* Slightly slimmer buttons to ensure bottom fit */
             font-size: 1rem; 
             border-radius: 30px;
             cursor: pointer;

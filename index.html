@@ -13,14 +13,16 @@
         }
         
         body {
-            height: 100vh; /* Fallback */
-            height: 100dvh; /* Dynamic height ensures it stays above the phone's bottom menu */
+            min-height: 100vh; /* Changed from height to min-height */
+            min-height: 100dvh; /* Dynamic height ensures it stays above the phone's bottom menu */
             display: flex;
             flex-direction: column; /* Stack vertically */
             padding: 15px 20px; /* Edge breathing room */
+            padding-bottom: calc(20px + env(safe-area-inset-bottom)); /* iPhone swipe bar safety net! */
             text-align: center;
             transition: background 0.8s ease, color 0.8s ease;
-            overflow: hidden; /* No scrolling */
+            overflow-x: hidden; /* No horizontal scrolling */
+            overflow-y: auto; /* ALLOWS SCROLLING ONLY IF TEXT IS TOO LONG! */
         }
 
         /* The Frosted Glass Container */
